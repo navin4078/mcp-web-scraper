@@ -10,7 +10,7 @@ A lightweight and efficient web scraping MCP server using direct STDIO protocol
 ```bash
 # Clone and setup
 git clone https://github.com/navin4078/mcp-web-scraper
-cd scrapper
+cd mcp-web-scraper
 chmod +x setup.sh && ./setup.sh
 ```
 
