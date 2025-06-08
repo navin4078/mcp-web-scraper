@@ -28,6 +28,11 @@ ENV/
 env.bak/
 venv.bak/
 
+# Playwright browsers (these are large binary files)
+**/ms-playwright/
+playwright-browsers/
+.playwright/
+
 # IDE
 .vscode/
 .idea/
@@ -47,6 +52,8 @@ Thumbs.db
 # Logs
 *.log
 logs/
+playwright-report/
+test-results/
 
 # Environment variables
 .env
@@ -65,3 +72,13 @@ logs/
 htmlcov/
 .tox/
 .pytest_cache/
+
+# Scraping output
+crawl_results/
+scraped_data/
+*.csv
+*.json
+
+# Temporary files
+temp/
+tmp/
