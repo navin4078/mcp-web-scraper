@@ -1,259 +1,262 @@
-# Enhanced MCP Web Scraper
+# MCP Web Scraper
 
-A powerful, intelligent web scraping MCP server with **advanced stealth features** and **maximum success rates** for modern websites. **Robots.txt bypassing enabled by default.**
+A lightweight and efficient web scraping MCP server using direct STDIO protocol
 
-## 🚀 Quick Setup
 
-### Step 1: Install the Scraper
+## 🚀 Quick Start
+
+### Option 1: Automated Setup
+
 ```bash
-git clone <your-repo>
-cd scrapper
+# Clone and setup
+git clone https://github.com/navin4078/mcp-web-scraper
+cd mcp-web-scraper
 chmod +x setup.sh && ./setup.sh
 ```
 
-### Step 2: Test Installation
+### Option 2: Manual Setup
+
 ```bash
-python test_installation.py
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install minimal dependencies
+pip install -r requirements.txt
 ```
 
-### Step 3: Configure Claude Desktop
-Add this to your Claude Desktop config file (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+## ⚙️ Claude Desktop Configuration
+
+### Step 1: Find Your Paths
+
+```bash
+# Get absolute paths (run this in your project directory)
+echo "Python path: $(pwd)/venv/bin/python"
+echo "Script path: $(pwd)/app_mcp.py"
+```
+
+### Step 2: Configure Claude Desktop
+
+Open your Claude Desktop config file:
+
+**macOS:**
+```
+~/Library/Application Support/Claude/claude_desktop_config.json
+```
+
+**Windows:**
+```
+%APPDATA%\Claude\claude_desktop_config.json
+```
+
+**Linux:**
+```
+~/.config/Claude/claude_desktop_config.json
+```
+
+### Step 3: Add Configuration
+
+Add this to your config file:
 
 ```json
 {
   "mcpServers": {
-    "enhanced-web-scraper": {
-      "command": "/Users/navinhemani/Desktop/scrapper/venv/bin/python",
-      "args": ["/Users/navinhemani/Desktop/scrapper/app_mcp.py"],
-      "env": {
-        "PYTHONPATH": "/Users/navinhemani/Desktop/scrapper"
-      }
+    "web-scraper": {
+      "command": "/full/path/to/your/venv/bin/python",
+      "args": ["/full/path/to/your/app_mcp.py"]
+    }
+  }
+}
+```
+
+**Example:**
+```json
+{
+  "mcpServers": {
+    "web-scraper": {
+      "command": "/Users/username/Desktop/scrapper/venv/bin/python",
+      "args": ["/Users/username/Desktop/scrapper/app_mcp.py"]
     }
   }
 }
 ```
 
 ### Step 4: Restart Claude Desktop
-1. Completely quit Claude Desktop
-2. Restart Claude Desktop  
-3. Look for the 🔨 (hammer) icon to access MCP tools
 
-## 🥷 Enhanced Features
-
-### **Robots.txt Bypassing**
-✅ **Always enabled by default** - No need to configure anything!
-```python
-respect_robots: bool = False  # Always ignore robots.txt
-ignore_robots_txt: bool = True  # Explicitly skip robots.txt checking
-```
-
-### **Stealth Capabilities**
-- ✅ **Advanced user agent rotation** with real browser fingerprints
-- ✅ **Human behavior simulation** with realistic delays
-- ✅ **Anti-detection browser configuration**
-- ✅ **Multiple extraction strategies** with intelligent fallback
-- ✅ **Enhanced content detection** for modern websites
-- ✅ **Automatic retry mechanisms** with exponential backoff
-
-### **Success Rate: 85-95%** (vs 30-50% for basic scrapers)
+1. Completely close Claude Desktop (Cmd+Q on Mac)
+2. Restart the application
+3. Look for the hammer icon (🔨)
+4. You should see "web-scraper" in your MCP servers
 
 ## 🛠️ Available Tools
 
-### 1. `scrape_website_enhanced`
-**Maximum extraction with stealth features**
-- Stealth mode enabled by default
-- Automatic fallback (Dynamic → Static)
-- Multiple extraction strategies
-- Enhanced content detection
+### **scrape_website**
+Extract data from websites with flexible options:
+- **extract_type**: `text`, `links`, `images`, `table`
+- **selector**: CSS selector for targeting specific elements
+- **max_results**: Limit number of results (1-50)
 
-### 2. `extract_article_content`
-**Advanced article detection**
-- Specialized for news/blog articles
-- Advanced content detection algorithms
-- Multiple parsing strategies
-- Content quality assessment
+### **extract_headlines**
+Get all headlines (h1, h2, h3) from a webpage with hierarchy and attributes.
 
-### 3. `extract_comprehensive_metadata`
-**Complete metadata extraction**
-- Standard metadata (title, description, keywords)
-- Social media metadata (Open Graph, Twitter Cards)
-- Structured data (Schema.org JSON-LD)
-- Technical metadata (headers, server info)
+### **extract_metadata**
+Extract comprehensive metadata:
+- Basic: title, description, keywords, author
+- Open Graph: og:title, og:description, og:image
+- Twitter Cards: twitter:title, twitter:description
 
-### 4. `crawl_website_enhanced`
-**Intelligent multi-page crawling**
-- High success rate crawling with stealth
-- Content-focused link discovery
-- Smart duplicate prevention
-- Comprehensive analysis and reporting
+### **get_page_info**
+Get page structure overview:
+- Element counts (paragraphs, headings, links, images, tables)
+- Basic metadata
+- Page statistics
 
 ## 💡 Usage Examples
 
-### **Maximum Success Rate Scraping**
+### Basic Scraping
 ```
-Scrape content from https://difficult-website.com with stealth mode enabled
+Scrape the text content from https://example.com
 
-Extract article content from https://news-site.com with all fallback strategies
+Extract all links from https://news.ycombinator.com
 
-Get comprehensive data from https://modern-spa.com using dynamic and static methods
-```
-
-### **Handling Protected Content**
-```
-Extract accessible content from https://protected-site.com with maximum retry attempts
-
-Scrape dynamic content from https://javascript-heavy-site.com with enhanced detection
-
-Get metadata from https://complex-website.com using all available methods
+Get headlines from https://www.bbc.com/news
 ```
 
-### **Advanced Crawling**
+### Advanced Examples
 ```
-Crawl https://large-website.com with enhanced stealth and 20 pages maximum
+Extract all images from https://example.com with their alt text
 
-Extract all product information from https://e-commerce-site.com with content focus
+Scrape text from https://example.com using the CSS selector ".article-content p"
 
-Discover all accessible content from https://corporate-site.com with depth 3
-```
+Get metadata and Open Graph tags from https://github.com
 
-## 🎯 Success Rate Optimization
-
-### **For Maximum Success**
-1. **Enable stealth mode** (default: true)
-2. **Use JavaScript rendering** for dynamic content
-3. **Set realistic delays** (2-5 seconds between requests)
-4. **Enable retry attempts** (default: 3 attempts)
-5. **Use content fallback** (automatic dynamic→static)
-
-### **Configuration Tips**
-```python
-# Maximum success configuration
-{
-    "use_javascript": true,
-    "stealth_mode": true,
-    "crawl_depth": 1,  # Start with 1, increase if needed
-    "max_pages": 10,   # Reasonable limit for testing
-}
+What's the page structure of https://stackoverflow.com?
 ```
 
-## 🔧 Advanced Features
+### Specific Selectors
+```
+Extract text from https://news.ycombinator.com using selector ".titleline a"
 
-### **Stealth Browser Configuration**
-- **Anti-detection arguments** for Playwright
-- **Realistic viewport** and user agent rotation
-- **Cookie persistence** across requests
-- **JavaScript fingerprint** removal
-- **Human-like scrolling** and interactions
+Get all table data from https://example.com/data-page
 
-### **Content Extraction Strategies**
-1. **Primary strategy**: Dynamic rendering with Playwright
-2. **Secondary strategy**: Static parsing with BeautifulSoup
-3. **Fallback strategy**: Raw content extraction
-4. **Emergency strategy**: Alternative selectors
+Scrape only paragraph text from articles using selector "article p"
+```
 
-### **Error Handling & Recovery**
-- **Automatic retries** with exponential backoff
-- **Multiple user agents** when blocked
-- **Session rotation** for persistent blocks
-- **Content validation** and quality checks
-- **Partial success** reporting
+## 📁 Project Structure
 
-## 🛡 Ethical Usage Guidelines
+```
+scrapper/
+├── app_mcp.py              # Main MCP server (STDIO)
+├── requirements.txt        # Minimal dependencies
+├── setup.sh                # Simple setup script
+├── .gitignore              # Git ignore rules
+└── README.md               # This file
+```
 
-### **What This Scraper Does**
-- ✅ **Improves success rates** through legitimate techniques
-- ✅ **Handles modern websites** with advanced features
-- ✅ **Respects rate limits** with realistic delays
-- ✅ **Uses standard web technologies** (browsers, HTTP)
-- ✅ **Provides transparency** about extraction methods
+## 🔧 Features
 
-### **What This Scraper Doesn't Do**
-- ❌ **Bypass authentication** or login requirements
-- ❌ **Circumvent legitimate paywalls** 
-- ❌ **Break website security** measures
-- ❌ **Violate terms of service** intentionally
-- ❌ **Ignore website requests** for responsible scraping
+### Web Scraping Capabilities
+- ✅ Text extraction with CSS selectors
+- ✅ Link extraction with full attributes
+- ✅ Image extraction with metadata
+- ✅ Table data extraction and formatting
+- ✅ Comprehensive metadata extraction
+- ✅ Headline extraction with hierarchy
+- ✅ Custom CSS selector support
+- ✅ Configurable result limits
+- ✅ Error handling and validation
 
-### **Best Practices**
-1. **Check robots.txt** and respect reasonable limits
-2. **Use appropriate delays** between requests
-3. **Don't overload servers** with too many concurrent requests
-4. **Respect website terms of service**
-5. **Only scrape publicly accessible content**
+### MCP Integration
+- ✅ Direct STDIO protocol (no HTTP needed)
+- ✅ Native Claude Desktop integration
+- ✅ Automatic server lifecycle management
+- ✅ Schema validation and documentation
+- ✅ Comprehensive error handling
+- ✅ Minimal dependencies
 
-## 📊 Performance Metrics
+## 🛡️ Security & Best Practices
 
-### **Success Rate by Website Type**
-| Website Type | Basic Scraper | Enhanced Scraper |
-|--------------|---------------|------------------|
-| **Static HTML** | 80% | 95% |
-| **Modern SPAs** | 20% | 85% |
-| **E-commerce** | 40% | 80% |
-| **News Sites** | 60% | 90% |
-| **Corporate** | 70% | 90% |
-| **Dynamic Content** | 30% | 85% |
+1. **Respect robots.txt**: Always check robots.txt before scraping
+2. **Rate limiting**: Built-in 10-second request timeout
+3. **User-Agent**: Uses modern browser headers
+4. **Input validation**: URL and parameter validation
+5. **Error handling**: Graceful error handling and reporting
+6. **Resource limits**: Configurable result limits prevent overload
 
-### **Feature Comparison**
-| Feature | Basic | Enhanced |
-|---------|-------|----------|
-| **User Agent Rotation** | Basic | Advanced |
-| **Retry Logic** | Simple | Exponential backoff |
-| **Content Detection** | Basic | Multi-strategy |
-| **Error Handling** | Limited | Comprehensive |
-| **Stealth Features** | None | Advanced |
-| **Fallback Options** | None | Multiple |
+## 🐛 Troubleshooting
 
-## 🔍 Troubleshooting
+### MCP Server Not Appearing
 
-### **Claude Desktop Issues**
+**Check your paths:**
 ```bash
-# If tools don't appear in Claude Desktop:
-1. Check config file path: ~/Library/Application Support/Claude/claude_desktop_config.json
-2. Verify Python path exists: /Users/navinhemani/Desktop/scrapper/venv/bin/python
-3. Restart Claude Desktop completely
-4. Look for error messages in Claude Desktop logs
+# Verify files exist
+ls -la /path/to/your/venv/bin/python
+ls -la /path/to/your/app_mcp.py
+
+# Test the script manually
+/path/to/your/venv/bin/python /path/to/your/app_mcp.py
 ```
 
-### **Scraping Issues**
+**Validate JSON configuration:**
+- Use a JSON validator to check syntax
+- Ensure no trailing commas
+- Use absolute paths (not relative)
+
+### Permission Issues
+
 ```bash
-# If content extraction fails:
-1. Verify stealth mode is enabled (default: true)
-2. Try increasing retry attempts
-3. Use JavaScript rendering for dynamic content
-4. Check if website requires authentication
+# Make script executable
+chmod +x app_mcp.py
+
+# Check virtual environment
+source venv/bin/activate
+python --version
 ```
 
-### **Installation Issues**
+### Import Errors
+
 ```bash
-# Recreate virtual environment:
-cd /Users/navinhemani/Desktop/scrapper
-./setup.sh
+# Reinstall dependencies
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
+
+### Testing the MCP Server
+
+You can test if the server works by running it manually:
+```bash
+source venv/bin/activate
+python app_mcp.py
+```
+
+The server should start and wait for STDIO input from Claude Desktop.
 
 ## 📚 Dependencies
 
-- **requests**: HTTP library with session management
-- **beautifulsoup4**: Advanced HTML parsing
-- **lxml**: Fast XML/HTML processing
-- **mcp**: Model Context Protocol framework
-- **playwright**: Stealth browser automation
-- **fake-useragent**: Realistic user agent rotation
+- **requests**: HTTP library for web requests
+- **beautifulsoup4**: HTML/XML parsing
+- **lxml**: Fast XML and HTML processor  
+- **mcp**: Model Context Protocol library
 
-## 📄 Legal Notice
 
-This tool is designed for legitimate web scraping of publicly accessible content. Users are responsible for:
-- Complying with website terms of service
-- Respecting robots.txt guidelines (when not bypassed)
-- Following applicable laws and regulations
-- Using appropriate rate limiting
-- Only accessing public content
+## 🤝 Contributing
 
-## 🎉 You're All Set!
+1. Fork the repository
+2. Create a feature branch
+3. Test thoroughly with Claude Desktop
+4. Submit a pull request
 
-Your enhanced web scraper is configured with:
-- ✅ Robots.txt bypassing enabled by default
-- ✅ Maximum stealth capabilities
-- ✅ Claude Desktop integration ready
-- ✅ 85-95% success rate on modern websites
+## 📄 License
 
-**Start scraping with maximum success rates!** 🥷✨
+This project is open source and available under the MIT License.
+
+## 🔗 Resources
+
+- [MCP Documentation](https://modelcontextprotocol.io/)
+- [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Claude Desktop](https://claude.ai/download)
+
+---
+
+**Simple, efficient web scraping for Claude Desktop! 🕷️✨**
